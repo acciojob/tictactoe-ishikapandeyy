@@ -1,26 +1,33 @@
 //your JS code here. If required.
 let p1=document.getElementById("player-1");
 let p2=document.getElementById("player-2");
-let btn=document.getElementById("gamebtn");
+let btn=document.getElementById("submit");
 let msg=document.getElementsByClassName("message")[0];
 let cells=document.getElementsByClassName("cell");
 let container = document.getElementById("container"); 
 let gameBoard = document.getElementById("gameBoard");
 
-btn.addEventListener("click", function() {
-  let name1 = p1.value;
-  let name2 = p2.value;
+let player1Name = "";
+let player2Name = "";
 
-  if(name1 === "" || name2 === "") {
+let gameStarted = false;  // To track if game started
+let turn = "X";
+
+btn.addEventListener("click", function() {
+  player1Name = p1.value.trim();
+  player2Name = p2.value.trim();
+
+  if(player1Name === "" || player2Name === "") {
     alert("Please enter names for both players.");
     return;
   }
 
-  console.log(name1, name2);
-   container.style.display = "none";
-  msg.textContent = `${name1}, you're up!`;
- 
-})
+  container.style.display = "none";
+  gameBoard.style.display = "block";
+  msg.textContent = `${player1Name}, you're up!`;
+
+  gameStarted = true;
+});
 
 function checkWinner() {
    if(cells[0].textContent !== "" && 
@@ -75,29 +82,25 @@ function checkWinner() {
  return false;
 }
 
-let turn = "X";
+function currentPlayerName() {
+  return turn === "X" ? player1Name : player2Name;
+}
 
-for(let i = 0; i < cells.length; i++) { 
-  cells[i].addEventListener("click", function() { 
-    if(cells[i].textContent !== "") {
-      return;
-    }
+for(let i = 0; i < cells.length; i++) {
+  cells[i].addEventListener("click", function() {
+    if(!gameStarted) return; // Ignore clicks if game hasn't started
+    if(cells[i].textContent !== "") return; // Ignore if cell already filled
+
     cells[i].textContent = turn;
-    
+
     if(checkWinner()) {
-     if(turn === "X") {
-        msg.textContent = `${turn} wins!`;
-      } else {
-        msg.textContent = `${turn} wins!`;
-      }
+      msg.textContent = `${currentPlayerName()} congratulations you won!`;
+      gameStarted = false; // Stop the game
       return;
     }
-    if(turn === "X") {
-      turn = "O";
-      msg.textContent = `${turn}, you're up!`;
-    } else {
-      turn = "X";
-      msg.textContent = `${turn}, you're up!`;
-    }
-  }); 
+
+    // Switch turns
+    turn = turn === "X" ? "O" : "X";
+    msg.textContent = `${currentPlayerName()}, you're up!`;
+  });
 }

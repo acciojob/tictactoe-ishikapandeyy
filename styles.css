@@ -2,7 +2,7 @@
 .gameTitle {
     font-family: cursive;
 }
-#gamebtn{
+#submit{
     height:2.5em; 
     width: 15em; 
     background-color: white; 
@@ -22,6 +22,7 @@
 }
 
 #gameBoard{
+	display: none;
     text-align: center; 
     margin-top: 50px; 
     width: 500px;
