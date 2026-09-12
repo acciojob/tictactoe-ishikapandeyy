@@ -1,1 +1,51 @@
 /*  your css code here. If applicable */
+.gameTitle {
+    font-family: cursive;
+}
+#gamebtn{
+    height:2.5em; 
+    width: 15em; 
+    background-color: white; 
+    border: 2px solid black; 
+    border-radius: 5px; 
+    font-weight: 400;
+}
+
+#container{
+     text-align: center; 
+     margin-top: 50px; 
+     width: 500px;
+     height: 300px;
+     padding: 90px;
+     margin-left: 400px;
+     background-color: whitesmoke;
+}
+
+#gameBoard{
+    text-align: center; 
+    margin-top: 50px; 
+    width: 500px;
+    height: 300px;
+    padding: 90px;
+    margin-left: 400px;
+    background-color: whitesmoke;
+}
+
+#board{
+    display: grid;
+    grid-template-columns: repeat(3, 100px);
+    grid-template-rows: repeat(3, 100px);
+    margin-top: 30px;
+    margin-left: 100px;
+}
+
+.message{
+    text-align: center;
+    margin-top: 20px;
+    font-size: 1.5em;
+}
+
+.cell{
+    background-color: #e6adad;
+    border: 0.5px solid #000000;
+}
